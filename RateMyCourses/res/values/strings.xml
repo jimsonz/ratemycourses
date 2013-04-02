@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RateMyCourses</string>
+    <string name="menu_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    
+    <string name="course_code">Course Code</string>
+    <string name="course_name">Course Name</string>
+    <string name="program_name">Program Name</string>
+    <string name="university_name">Boston University,</string>
+    <string name="professor">Professor:</string>
+    <string name="prof_name">Prof Name</string>
+    <string name="rating">No. of Ratings:</string>
+    <string name="rating_value">10</string>
+    <string name="easiness">Easiness:</string>
+    <string name="easiness_value">0</string>
+    <string name="workload">Workload:</string>
+    <string name="workload_value">0</string>
+    <string name="overall">Overall:</string>
+    <string name="overall_value">0</string>
+    <string name="tell_friend">Tell a Friend</string>
+    <string name="rate_course">Rate this Course</string>
+    <string name="read_comments">Read Comments</string>
+    
+    <string name="cr_easiness">EASINESS:</string>
+    <string name="cr_workload">WORKLOAD:</string>
+    <string name="cr_overall">OVERALL:</string>
+    <string-array name="spinner_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string name="enter_comment">Comments:</string>
+    <string name="commit_rate_bt">RATE THIS COURSE!</string>
+
+</resources>

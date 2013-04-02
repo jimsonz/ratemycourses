@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/cr_easiness_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cr_easiness"
+        android:textSize="15sp" />
+    
+    <Spinner
+        android:id="@+id/easiness_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cr_easiness_label"
+        android:layout_marginLeft="8sp"
+        android:layout_toRightOf="@id/cr_easiness_label" />
+    
+    <TextView
+        android:id="@+id/cr_workload_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cr_easiness_label"
+        android:text="@string/cr_workload"
+        android:textSize="15sp" />
+    
+    <Spinner
+        android:id="@+id/workload_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cr_workload_label"
+        android:layout_below="@id/easiness_spinner"
+        android:layout_marginLeft="8sp"
+        android:layout_toRightOf="@id/cr_workload_label" />
+
+    <TextView
+        android:id="@+id/cr_overall_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cr_workload_label"
+        android:text="@string/cr_overall"
+        android:textSize="15sp" />
+    
+    <Spinner
+        android:id="@+id/overall_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cr_overall_label"
+        android:layout_below="@id/workload_spinner"
+        android:layout_marginLeft="8sp"
+        android:layout_toRightOf="@id/cr_overall_label" />
+    
+    <TextView 
+        android:id="@+id/enter_comment_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cr_overall_label"
+        android:text="@string/enter_comment"
+        android:textSize="15sp" />
+    
+    <EditText
+        android:id="@+id/comment_field"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enter_comment_label"
+        android:inputType="text"
+        android:textSize="15sp" />
+    
+    <Button 
+        android:id="@+id/commit_rate_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment_field"
+        android:text="@string/commit_rate_bt" />
+
+</RelativeLayout>

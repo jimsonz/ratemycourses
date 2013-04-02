@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/course_code_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="@string/course_code"/>
+
+    <TextView
+        android:id="@+id/course_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/course_code_label"
+        android:text="@string/course_name"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/university_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/course_code_label"
+        android:text="@string/university_name"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/program_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@+id/course_name_label"
+        android:layout_toRightOf="@+id/university_name_label"
+        android:text="@string/program_name"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/professor_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/university_name_label"
+        android:text="@string/professor"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/prof_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@+id/program_name_label"
+        android:layout_toRightOf="@+id/professor_label"
+        android:text="@string/prof_name"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/bookImage"
+        android:layout_width="150dp"
+        android:layout_height="180dp"
+        android:layout_below="@+id/professor_label"
+        android:scaleType="centerInside"
+        android:gravity="right|center_vertical"
+        android:src="@drawable/ic_launcher" />
+    
+    <TextView
+        android:id="@+id/rating_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bookImage"
+        android:layout_toRightOf="@+id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/rating"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/rating_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/bookImage"
+        android:layout_toRightOf="@id/rating_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/rating_value"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/easiness_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_label"
+        android:layout_toRightOf="@id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/easiness"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/easiness_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_value_label"
+        android:layout_toRightOf="@id/easiness_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/easiness_value"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/workload_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/easiness_label"
+        android:layout_toRightOf="@id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/workload"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/workload_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/easiness_value_label"
+        android:layout_toRightOf="@id/workload_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/workload_value"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/overall_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workload_label"
+        android:layout_toRightOf="@id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/overall"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/overall_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workload_value_label"
+        android:layout_toRightOf="@id/overall_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/overall_value"
+        android:textSize="15sp" />
+    
+    <Button 
+        android:id="@+id/tell_friend_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bookImage"
+        android:layout_marginLeft="18dp"
+        android:text="@string/tell_friend" />
+    
+    <Button 
+        android:id="@+id/rate_course_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bookImage"
+        android:layout_toRightOf="@id/tell_friend_bt"
+        android:layout_marginLeft="8dp"
+        android:text="@string/rate_course" />
+    
+    <Button 
+        android:id="@+id/read_comments_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tell_friend_bt"
+        android:layout_centerInParent="true"
+        android:text="@string/read_comments" />
+    
+</RelativeLayout>
