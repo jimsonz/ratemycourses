@@ -1,7 +1,7 @@
-package com.ratemycourses.service;
+package com.example.ratemycourses.service;
 
 import com.example.ratemycourses.R;
-import com.ratemycourses.listview.DeptList;
+import com.example.ratemycourses.listview.DeptList;
 
 import android.os.Bundle;
 import android.app.Activity;

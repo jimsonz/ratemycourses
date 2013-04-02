@@ -1,4 +1,4 @@
-package com.ratemycourses.course;
+package com.example.ratemycourses.course;
 
 import android.app.Activity;
 

@@ -1,4 +1,4 @@
-package com.ratemycourses.service;
+package com.example.ratemycourses.service;
 
 public class ServerUnavailableException extends Exception {
 	
