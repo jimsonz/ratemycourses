@@ -1,4 +1,4 @@
-package com.example.ratemycourses.listview;
+package com.ratemycourses.listview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,41 +10,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.ratemycourses.R;
-import com.example.ratemycourses.service.JSONHelper;
+import com.ratemycourses.service.JSONHelper;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-public class CourseList extends ListActivity {
-	
+public class DeptList extends ListActivity {
+
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();
 	
-	ArrayList<HashMap<String, String>> coursesList;
+	ArrayList<HashMap<String, String>> deptList;
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
-	private static String url_all_courses = "http://10.0.2.2/RateMyCourses/get_all_courses.php";
+	private static String url_all_dept = "http://10.0.2.2/RateMyCourses/get_all_depts.php";
 	
 	// JSON node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_COURSES = "COURSES";
-	private static final String TAG_COURSEID = "COURSEID";
-	private static final String TAG_COURSENAME = "COURSENAME";
+	private static final String TAG_DEPT = "DEPT";
+	private static final String TAG_DEPTCODE = "DEPTCODE";
+	private static final String TAG_DEPTNAME = "DEPTNAME";
 	
 	// courses JSONArray
-	JSONArray courses = null;
+	JSONArray depts = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,35 +50,26 @@ public class CourseList extends ListActivity {
 		setContentView(R.layout.list_view);
 		
 		// hashmap for ListView
-		coursesList = new ArrayList<HashMap<String, String>>();
+		deptList = new ArrayList<HashMap<String, String>>();
 		
-		// loading courses in Background Thread
-		new LoadAllCourses().execute();
+		// loading depts in background thread
+		new LoadAllDepts().execute();
 		
 		// get listview
-		//ListView lv = getListView();
-		getListView();
+		ListView lv = getListView();
 		
-/*		// on selecting single course
-		// launching course review screen
+		// on selecting single dept
+/*		// launching program list view
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// getting values from selected ListItem
-				String courseid = ((TextView) view.findViewById(R.id.courseid)).getText().toString();
-				
 				
 			}
 		});*/
 	}
 	
-	// response from course rating activity
-	
-	/**
-	 * Background Async Task to load all course by making HTTP request
-	 */
-	class LoadAllCourses extends AsyncTask<String, String, String> {
+	class LoadAllDepts extends AsyncTask<String, String, String> {
 		
 		/**
 		 * Before starting background thread show Progress Dialog
@@ -88,25 +77,25 @@ public class CourseList extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(CourseList.this);
-			pDialog.setMessage("Loading courses. Please wait...");
+			pDialog = new ProgressDialog(DeptList.this);
+			pDialog.setMessage("Loading departments. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
 			pDialog.show();
 		}
 		
 		/**
-		 * getting all courses from url
+		 * getting all depts from url
 		 */
 		protected String doInBackground(String... args) {
 			// building parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair> ();
 			
 			// getting JSON string from URL
-			JSONObject json = jHelper.makeHttpRequest(url_all_courses, "GET", params);
+			JSONObject json = jHelper.makeHttpRequest(url_all_dept, "GET", params);
 			
 			// check your log cat for JSON response
-			Log.d("All Courses: ", json.toString());
+			Log.d("All Depts: ", json.toString());
 			
 			try {
 				// checking for SUCCESS TAG
@@ -115,30 +104,30 @@ public class CourseList extends ListActivity {
 				if (success == 1) {
 					// courses found
 					// getting array of courses
-					courses = json.getJSONArray(TAG_COURSES);
+					depts = json.getJSONArray(TAG_DEPT);
 					
 					// looping through all courses
-					for (int i=0; i<courses.length(); i++) {
-						JSONObject c = courses.getJSONObject(i);
+					for (int i=0; i<depts.length(); i++) {
+						JSONObject c = depts.getJSONObject(i);
 						
 						// stroing each json item in variable
-						String courseid = c.getString(TAG_COURSEID);
-						String coursename = c.getString(TAG_COURSENAME);
+						String deptCode = c.getString(TAG_DEPTCODE);
+						String deptName = c.getString(TAG_DEPTNAME);
 						
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 						
 						// adding each child node to HashMap key => value
-						map.put(TAG_COURSEID, courseid);
-						map.put(TAG_COURSENAME, coursename);
+						map.put(TAG_DEPTCODE, deptCode);
+						map.put(TAG_DEPTNAME, deptName);
 						
 						// adding HashList to ArrayList
-						coursesList.add(map);
+						deptList.add(map);
 					}
 				} else {
-					// no courses found
+					// no dept found
 					// prompt a "courses not found" message
-					Toast toast = Toast.makeText(getApplicationContext(), "No courses found", Toast.LENGTH_SHORT);
+					Toast toast = Toast.makeText(getApplicationContext(), "No departments found", Toast.LENGTH_SHORT);
 					toast.show();
 				}
 			} catch (JSONException e) {
@@ -161,9 +150,9 @@ public class CourseList extends ListActivity {
 					 * Updating parsed JSON data into ListView
 					 */
 					ListAdapter adapter = new SimpleAdapter(
-							CourseList.this, coursesList,
-							R.layout.list_item, new String[] { TAG_COURSEID, TAG_COURSENAME},
-							new int[] { R.id.courseid, R.id.coursename });
+							DeptList.this, deptList,
+							R.layout.list_item, new String[] {TAG_DEPTNAME},
+							new int[] {R.id.deptname });
 					// updating listview
 					setListAdapter(adapter);
 				}

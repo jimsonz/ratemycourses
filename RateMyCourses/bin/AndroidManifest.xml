@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
         <activity
-            android:name="com.example.ratemycourses.service.MainActivity"
+            android:name="com.ratemycourses.service.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,12 @@
         </activity>
         
         <activity
-            android:name="com.example.ratemycourses.listview.CourseList"
+            android:name="com.ratemycourses.listview.CourseList"
             android:label="All Courses" >
         </activity>
         
         <activity
-            android:name="com.example.ratemycourses.listview.DeptList"
+            android:name="com.ratemycourses.listview.DeptList"
             android:label="All Depts" >
         </activity>
     </application>
