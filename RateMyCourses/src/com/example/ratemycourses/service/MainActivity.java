@@ -2,6 +2,7 @@ package com.example.ratemycourses.service;
 
 import com.example.ratemycourses.R;
 import com.example.ratemycourses.listview.DeptList;
+import com.example.ratemycourses.listview.ProgramList;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	Button btnViewCourses;
+	Button loginBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +23,14 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		// Buttons
-		btnViewCourses = (Button) findViewById(R.id.login_btn);
+		loginBtn = (Button) findViewById(R.id.login_btn);
 		
 		// view courses click event
-		btnViewCourses.setOnClickListener(new View.OnClickListener() {
+		loginBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// Lauching All courses activity
+				// Lauching All dept activity
 				Intent i = new Intent(getApplicationContext(), DeptList.class);
 				startActivity(i);
 				

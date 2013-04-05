@@ -35,7 +35,7 @@ public class CourseList extends ListActivity {
 	ArrayList<HashMap<String, String>> coursesList;
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
-	private static String url_all_courses = "http://10.0.2.2/RateMyCourses/get_all_courses.php";
+	private static String url_all_courses = "http://eleven.luporz.com/ratemycourses/get_all_courses.php";
 	
 	// JSON node names
 	private static final String TAG_SUCCESS = "success";
@@ -162,7 +162,7 @@ public class CourseList extends ListActivity {
 					 */
 					ListAdapter adapter = new SimpleAdapter(
 							CourseList.this, coursesList,
-							R.layout.list_item, new String[] { TAG_COURSEID, TAG_COURSENAME},
+							R.layout.dept_list, new String[] { TAG_COURSEID, TAG_COURSENAME},
 							new int[] { R.id.courseid, R.id.coursename });
 					// updating listview
 					setListAdapter(adapter);

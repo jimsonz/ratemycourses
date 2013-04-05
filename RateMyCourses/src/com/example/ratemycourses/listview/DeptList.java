@@ -14,12 +14,19 @@ import com.example.ratemycourses.service.JSONHelper;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DeptList extends ListActivity {
@@ -33,7 +40,7 @@ public class DeptList extends ListActivity {
 	ArrayList<HashMap<String, String>> deptList;
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
-	private static String url_all_dept = "http://10.0.2.2/RateMyCourses/get_all_depts.php";
+	private static String url_all_dept = "http://eleven.luporz.com/ratemycourses/get_all_depts.php";
 	
 	// JSON node names
 	private static final String TAG_SUCCESS = "success";
@@ -57,16 +64,39 @@ public class DeptList extends ListActivity {
 		
 		// get listview
 		ListView lv = getListView();
-		
+/*		
+		Button testB;
+		testB = (Button) findViewById(R.id.testBt);
+		testB.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), ProgramList.class);
+				startActivity(i);
+			}
+		});
+	*/	
 		// on selecting single dept
-/*		// launching program list view
+		// launching program list view
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			
+			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
+				// getting values from selected ListItem
+				String deptCode = ((TextView) view.findViewById(R.id.deptcode)).getText().toString();
+				
+				// Starting new intent
+				Intent i = new Intent(getApplicationContext(), ProgramList.class);
+				
+				// Sending deptCode to next activity
+				//i.putExtra(TAG_DEPTCODE, deptCode);
+				startActivity(i);
 			}
-		});*/
+		});
+		
 	}
 	
 	class LoadAllDepts extends AsyncTask<String, String, String> {
@@ -103,10 +133,10 @@ public class DeptList extends ListActivity {
 				
 				if (success == 1) {
 					// courses found
-					// getting array of courses
+					// getting array of depts
 					depts = json.getJSONArray(TAG_DEPT);
 					
-					// looping through all courses
+					// looping through all depts
 					for (int i=0; i<depts.length(); i++) {
 						JSONObject c = depts.getJSONObject(i);
 						
@@ -126,7 +156,7 @@ public class DeptList extends ListActivity {
 					}
 				} else {
 					// no dept found
-					// prompt a "courses not found" message
+					// prompt a "depts not found" message
 					Toast toast = Toast.makeText(getApplicationContext(), "No departments found", Toast.LENGTH_SHORT);
 					toast.show();
 				}
@@ -151,8 +181,8 @@ public class DeptList extends ListActivity {
 					 */
 					ListAdapter adapter = new SimpleAdapter(
 							DeptList.this, deptList,
-							R.layout.list_item, new String[] {TAG_DEPTNAME},
-							new int[] {R.id.deptname });
+							R.layout.dept_list, new String[] {TAG_DEPTCODE, TAG_DEPTNAME},
+							new int[] {R.id.deptcode, R.id.deptname });
 					// updating listview
 					setListAdapter(adapter);
 				}

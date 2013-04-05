@@ -25,12 +25,17 @@
         
         <activity
             android:name="com.example.ratemycourses.listview.CourseList"
-            android:label="All Courses" >
+            android:label="Courses" >
         </activity>
         
         <activity
             android:name="com.example.ratemycourses.listview.DeptList"
-            android:label="All Depts" >
+            android:label="Departments" >
+        </activity>
+        
+        <activity
+            android:name="com.example.ratemycourses.listview.ProgramList"
+            android:label="Programs" >
         </activity>
     </application>
     
