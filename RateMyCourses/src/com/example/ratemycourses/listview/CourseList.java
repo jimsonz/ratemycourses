@@ -10,10 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.ratemycourses.R;
+import com.example.ratemycourses.course.CourseView;
 import com.example.ratemycourses.service.JSONHelper;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +34,7 @@ public class CourseList extends ListActivity {
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();
 	
-	ArrayList<HashMap<String, String>> coursesList;
+	private ArrayList<HashMap<String, String>> coursesList = new ArrayList<HashMap<String, String>>();
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
 	private static String url_all_courses = "http://eleven.luporz.com/ratemycourses/get_all_courses.php";
@@ -49,33 +51,25 @@ public class CourseList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_view);
-		
-		// hashmap for ListView
-		coursesList = new ArrayList<HashMap<String, String>>();
 		
 		// loading courses in Background Thread
 		new LoadAllCourses().execute();
-		
-		// get listview
-		//ListView lv = getListView();
-		getListView();
-		
-/*		// on selecting single course
-		// launching course review screen
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// getting values from selected ListItem
-				String courseid = ((TextView) view.findViewById(R.id.courseid)).getText().toString();
-				
-				
-			}
-		});*/
 	}
 	
-	// response from course rating activity
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+	    //Toast.makeText(this, position + " selected", Toast.LENGTH_LONG).show();
+		
+		// getting values from selected ListItem
+		//String deptCode = ((TextView) v.findViewById(R.id.deptcode)).getText().toString();
+		
+		// Starting new intent
+		Intent i = new Intent(getApplicationContext(), CourseView.class);
+		
+		// Sending deptCode to next activity
+		//i.putExtra(TAG_DEPTCODE, deptCode);
+		startActivity(i);
+	}
 	
 	/**
 	 * Background Async Task to load all course by making HTTP request
@@ -162,7 +156,7 @@ public class CourseList extends ListActivity {
 					 */
 					ListAdapter adapter = new SimpleAdapter(
 							CourseList.this, coursesList,
-							R.layout.dept_list, new String[] { TAG_COURSEID, TAG_COURSENAME},
+							R.layout.course_list, new String[] {TAG_COURSEID, TAG_COURSENAME},
 							new int[] { R.id.courseid, R.id.coursename });
 					// updating listview
 					setListAdapter(adapter);

@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -38,7 +39,7 @@ public class ProgramList extends ListActivity{
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();
 	
-	ArrayList<HashMap<String, String>> proList;
+	private ArrayList<HashMap<String, String>> proList = new ArrayList<HashMap<String, String>>();
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
 	private static String url_all_pro = "http://eleven.luporz.com/ratemycourses/get_all_programs.php";
@@ -56,7 +57,6 @@ public class ProgramList extends ListActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_view);
 		
 		// getting dept details from intent
 		Intent i = getIntent();
@@ -64,35 +64,23 @@ public class ProgramList extends ListActivity{
 		// getting dept code from intent
 		deptCode = i.getStringExtra(TAG_DEPTCODE);
 		
-		// hashmap for ListView
-		proList = new ArrayList<HashMap<String, String>>();
-		
 		// loading programs in background thread
 		new LoadAllPrograms().execute();
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+	    //Toast.makeText(this, position + " selected", Toast.LENGTH_LONG).show();
 		
-		// get listview
-		ListView lv = getListView();
+		// getting values from selected ListItem
+		//String deptCode = ((TextView) v.findViewById(R.id.deptcode)).getText().toString();
 		
-		// on selecting single program
-		// launch the course view
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Toast.makeText(getApplicationContext(), "testing selectable " + position, Toast.LENGTH_LONG).show();
-				/*
-				// getting values from selected ListItem
-				String deptCode = ((TextView) view.findViewById(R.id.deptcode)).getText().toString();
-				
-				// Starting new intent
-				Intent i = new Intent(getApplicationContext(), ProgramList.class);
-				
-				// Sending deptCode to next activity
-				i.putExtra(TAG_DEPTCODE, deptCode);
-				startActivity(i);*/
-			}
-		});
+		// Starting new intent
+		Intent i = new Intent(getApplicationContext(), CourseList.class);
+		
+		// Sending deptCode to next activity
+		//i.putExtra(TAG_DEPTCODE, deptCode);
+		startActivity(i);
 	}
 	
 	class LoadAllPrograms extends AsyncTask<String, String, String> {

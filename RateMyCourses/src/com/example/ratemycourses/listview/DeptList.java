@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.example.ratemycourses.R;
 import com.example.ratemycourses.service.JSONHelper;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -29,15 +31,22 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * List all departments
+ * 
+ * @author Jimson
+ *
+ */
 public class DeptList extends ListActivity {
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
+	//ListAdapter adapter;
 	
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();
 	
-	ArrayList<HashMap<String, String>> deptList;
+	private ArrayList<HashMap<String, String>> deptList = new ArrayList<HashMap<String, String>>();
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
 	private static String url_all_dept = "http://eleven.luporz.com/ratemycourses/get_all_depts.php";
@@ -54,49 +63,24 @@ public class DeptList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_view);
 		
-		// hashmap for ListView
-		deptList = new ArrayList<HashMap<String, String>>();
-		
-		// loading depts in background thread
+		// load all departments
 		new LoadAllDepts().execute();
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+	    //Toast.makeText(this, position + " selected", Toast.LENGTH_LONG).show();
 		
-		// get listview
-		ListView lv = getListView();
-/*		
-		Button testB;
-		testB = (Button) findViewById(R.id.testBt);
-		testB.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(), ProgramList.class);
-				startActivity(i);
-			}
-		});
-	*/	
-		// on selecting single dept
-		// launching program list view
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				
-				// getting values from selected ListItem
-				String deptCode = ((TextView) view.findViewById(R.id.deptcode)).getText().toString();
-				
-				// Starting new intent
-				Intent i = new Intent(getApplicationContext(), ProgramList.class);
-				
-				// Sending deptCode to next activity
-				//i.putExtra(TAG_DEPTCODE, deptCode);
-				startActivity(i);
-			}
-		});
+		// getting values from selected ListItem
+		String deptCode = ((TextView) v.findViewById(R.id.deptcode)).getText().toString();
 		
+		// Starting new intent
+		Intent i = new Intent(getApplicationContext(), ProgramList.class);
+		
+		// Sending deptCode to next activity
+		//i.putExtra(TAG_DEPTCODE, deptCode);
+		startActivity(i);
 	}
 	
 	class LoadAllDepts extends AsyncTask<String, String, String> {
