@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:textStyle="bold"
         android:text="@string/course_code"/>
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@+id/course_code_label"
         android:text="@string/course_name"
+        android:textStyle="bold"
         android:textSize="15sp" />
     
     <TextView
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/course_code_label"
         android:text="@string/university_name"
+        android:textStyle="bold"
         android:textSize="15sp" />
     
     <TextView
@@ -37,6 +40,7 @@
         android:layout_below="@+id/course_name_label"
         android:layout_toRightOf="@+id/university_name_label"
         android:text="@string/program_name"
+        android:textStyle="bold"
         android:textSize="15sp" />
     
     <TextView
@@ -45,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/university_name_label"
         android:text="@string/professor"
+        android:textStyle="bold"
         android:textSize="15sp" />
 
     <TextView
@@ -55,6 +60,7 @@
         android:layout_below="@+id/program_name_label"
         android:layout_toRightOf="@+id/professor_label"
         android:text="@string/prof_name"
+        android:textStyle="bold"
         android:textSize="15sp" />
 
     <ImageView
@@ -67,30 +73,69 @@
         android:src="@drawable/ic_launcher" />
     
     <TextView
-        android:id="@+id/rating_label"
+        android:id="@+id/rating_value_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/bookImage"
-        android:layout_toRightOf="@+id/bookImage"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="23dp"
+        android:layout_toRightOf="@+id/interest_level_value_label"
+        android:text="@string/rating_value"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/rating_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/helpfuness_value_label"
+        android:layout_alignRight="@+id/helpfuness_value_label"
         android:text="@string/rating"
         android:textSize="15sp" />
     
     <TextView
-        android:id="@+id/rating_value_label"
+        android:id="@+id/helpfuness_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/bookImage"
-        android:layout_toRightOf="@id/rating_label"
+        android:layout_below="@id/rating_label"
+        android:layout_toRightOf="@id/bookImage"
         android:layout_marginLeft="8dp"
-        android:text="@string/rating_value"
+        android:text="@string/helpfulness"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/helpfuness_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_value_label"
+        android:layout_toRightOf="@id/helpfuness_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/easiness_value"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/interest_level_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/helpfuness_label"
+        android:layout_toRightOf="@id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/interest_level"
+        android:textSize="15sp" />
+    
+    <TextView
+        android:id="@+id/interest_level_value_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/helpfuness_value_label"
+        android:layout_toRightOf="@id/interest_level_label"
+        android:layout_marginLeft="8dp"
+        android:text="@string/easiness_value"
         android:textSize="15sp" />
     
     <TextView
         android:id="@+id/easiness_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rating_label"
+        android:layout_below="@id/interest_level_label"
         android:layout_toRightOf="@id/bookImage"
         android:layout_marginLeft="8dp"
         android:text="@string/easiness"
@@ -100,7 +145,7 @@
         android:id="@+id/easiness_value_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rating_value_label"
+        android:layout_below="@id/interest_level_value_label"
         android:layout_toRightOf="@id/easiness_label"
         android:layout_marginLeft="8dp"
         android:text="@string/easiness_value"
@@ -163,12 +208,12 @@
         android:layout_marginLeft="8dp"
         android:text="@string/rate_course" />
     
-    <Button 
-        android:id="@+id/read_comments_bt"
-        android:layout_width="fill_parent"
+    <ListView 
+        android:id="@+id/cmmt_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tell_friend_bt"
-        android:layout_centerInParent="true"
-        android:text="@string/read_comments" />
+        android:layout_below="@id/rate_course_bt" />
+
+    
     
 </RelativeLayout>

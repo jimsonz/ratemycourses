@@ -17,16 +17,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.ratemycourses.R;
-import com.example.ratemycourses.listview.DeptList.LoadAllDepts;
 import com.example.ratemycourses.service.JSONHelper;
 
 public class ProgramList extends ListActivity{
@@ -42,7 +39,7 @@ public class ProgramList extends ListActivity{
 	private ArrayList<HashMap<String, String>> proList = new ArrayList<HashMap<String, String>>();
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
-	private static String url_all_pro = "http://eleven.luporz.com/ratemycourses/get_all_programs.php";
+	private static String url_programs = "http://eleven.luporz.com/ratemycourses/get_programs.php";
 	
 	// JSON node names
 	private static final String TAG_SUCCESS = "success";
@@ -70,16 +67,15 @@ public class ProgramList extends ListActivity{
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-	    //Toast.makeText(this, position + " selected", Toast.LENGTH_LONG).show();
 		
 		// getting values from selected ListItem
-		//String deptCode = ((TextView) v.findViewById(R.id.deptcode)).getText().toString();
+		String proCode = ((TextView) v.findViewById(R.id.programcode)).getText().toString();
 		
 		// Starting new intent
 		Intent i = new Intent(getApplicationContext(), CourseList.class);
 		
 		// Sending deptCode to next activity
-		//i.putExtra(TAG_DEPTCODE, deptCode);
+		i.putExtra(TAG_PROCODE, proCode);
 		startActivity(i);
 	}
 	
@@ -104,13 +100,13 @@ public class ProgramList extends ListActivity{
 		protected String doInBackground(String... args) {
 			// building parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair> ();
-			params.add(new BasicNameValuePair("DEPTCODE", "MET"));
+			params.add(new BasicNameValuePair("DEPTCODE", deptCode));
 			
 			// getting JSON string from URL
-			JSONObject json = jHelper.makeHttpRequest(url_all_pro, "GET", params);
+			JSONObject json = jHelper.makeHttpRequest(url_programs, "GET", params);
 			
 			// check your log cat for JSON response
-			Log.d("All Programs: ", json.toString());
+			Log.d("Programs: ", json.toString());
 			
 			try {
 				// checking for SUCCESS TAG

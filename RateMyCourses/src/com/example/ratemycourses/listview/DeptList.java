@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import com.example.ratemycourses.R;
 import com.example.ratemycourses.service.JSONHelper;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,11 +19,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -79,7 +73,7 @@ public class DeptList extends ListActivity {
 		Intent i = new Intent(getApplicationContext(), ProgramList.class);
 		
 		// Sending deptCode to next activity
-		//i.putExtra(TAG_DEPTCODE, deptCode);
+		i.putExtra(TAG_DEPTCODE, deptCode);
 		startActivity(i);
 	}
 	

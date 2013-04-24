@@ -1,79 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <TextView
-        android:id="@+id/cr_easiness_label"
+    <TableRow 
+        android:id="@+id/helpfulness_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cr_easiness"
-        android:textSize="15sp" />
+        android:gravity="center_vertical">
+        
+        <TextView
+        	android:id="@+id/cr_helpfulness"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	android:text="@string/helpfulness" />
+        
+        <RatingBar
+        	android:id="@+id/helpfulness_ratingBar"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:numStars="5" />
+        
+    </TableRow>
     
-    <Spinner
-        android:id="@+id/easiness_spinner"
+    <TableRow 
+        android:id="@+id/interest_level_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cr_easiness_label"
-        android:layout_marginLeft="8sp"
-        android:layout_toRightOf="@id/cr_easiness_label" />
+        android:gravity="center_vertical">
+        
+        <TextView
+        	android:id="@+id/cr_interest_level"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	android:text="@string/interest_level" />
+        
+        <RatingBar
+        	android:id="@+id/interest_level_ratingBar"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:numStars="5"
+        	android:stepSize="0.5" />
+        
+    </TableRow>
     
-    <TextView
-        android:id="@+id/cr_workload_label"
+    <TableRow 
+        android:id="@+id/easiness_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cr_easiness_label"
-        android:text="@string/cr_workload"
-        android:textSize="15sp" />
+        android:gravity="center_vertical">
+        
+        <TextView
+        	android:id="@+id/cr_easiness"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	android:text="@string/easiness" />
+        
+        <RatingBar
+        	android:id="@+id/easiness_ratingBar"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:numStars="5"
+        	android:stepSize="0.5" />
+        
+    </TableRow>
     
-    <Spinner
-        android:id="@+id/workload_spinner"
+    <TableRow 
+        android:id="@+id/workload_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cr_workload_label"
-        android:layout_below="@id/easiness_spinner"
-        android:layout_marginLeft="8sp"
-        android:layout_toRightOf="@id/cr_workload_label" />
-
-    <TextView
-        android:id="@+id/cr_overall_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cr_workload_label"
-        android:text="@string/cr_overall"
-        android:textSize="15sp" />
+        android:gravity="center_vertical">
+        
+        <TextView
+        	android:id="@+id/cr_workload"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	android:text="@string/workload" />
+        
+        <RatingBar
+        	android:id="@+id/workload_ratingBar"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:numStars="5"
+        	android:stepSize="0.5" />
+        
+    </TableRow>
     
-    <Spinner
-        android:id="@+id/overall_spinner"
+    <TableRow 
+        android:id="@+id/overall_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cr_overall_label"
-        android:layout_below="@id/workload_spinner"
-        android:layout_marginLeft="8sp"
-        android:layout_toRightOf="@id/cr_overall_label" />
-    
+        android:gravity="center_vertical">
+        
+        <TextView
+        	android:id="@+id/cr_overall"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	android:text="@string/overall" />
+        
+        <RatingBar
+        	android:id="@+id/overall_ratingBar"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:numStars="5"
+        	android:stepSize="0.5" />
+        
+    </TableRow>
+        
     <TextView 
-        android:id="@+id/enter_comment_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cr_overall_label"
-        android:text="@string/enter_comment"
-        android:textSize="15sp" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/enter_comment"/>
     
-    <EditText
-        android:id="@+id/comment_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/enter_comment_label"
-        android:inputType="text"
-        android:textSize="15sp" />
+    <EditText 
+        android:id="@+id/comment_text"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:inputType="text"/>
     
     <Button 
         android:id="@+id/commit_rate_bt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/comment_field"
         android:text="@string/commit_rate_bt" />
 
-</RelativeLayout>
+</LinearLayout>

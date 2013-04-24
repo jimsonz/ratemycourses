@@ -7,6 +7,7 @@
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     
+    <!-- course view page -->
     <string name="course_code">Course Code</string>
     <string name="course_name">Course Name</string>
     <string name="program_name">Program Name</string>
@@ -15,6 +16,8 @@
     <string name="prof_name">Prof Name</string>
     <string name="rating">No. of Ratings:</string>
     <string name="rating_value">10</string>
+    <string name="helpfulness">Helpfulness:</string>
+    <string name="interest_level">Interest Level:</string>
     <string name="easiness">Easiness:</string>
     <string name="easiness_value">0</string>
     <string name="workload">Workload:</string>
@@ -25,16 +28,7 @@
     <string name="rate_course">Rate this Course</string>
     <string name="read_comments">Read Comments</string>
     
-    <string name="cr_easiness">EASINESS:</string>
-    <string name="cr_workload">WORKLOAD:</string>
-    <string name="cr_overall">OVERALL:</string>
-    <string-array name="spinner_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
+    <!-- course rating page -->
     <string name="enter_comment">Comments:</string>
     <string name="commit_rate_bt">RATE THIS COURSE!</string>
 
