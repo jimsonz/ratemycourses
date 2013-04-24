@@ -1,4 +1,4 @@
-package com.example.ratemycourses.service;
+package bu.cs683.ratemycourses.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.ratemycourses.listview;
+package bu.cs683.ratemycourses.listview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.ratemycourses.R;
-import com.example.ratemycourses.course.CourseView;
-import com.example.ratemycourses.service.JSONHelper;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,38 +17,39 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import bu.cs683.ratemycourses.service.JSONHelper;
 
-public class CourseList extends ListActivity {
+import com.example.ratemycourses.R;
+
+public class ProgramList extends ListActivity{
+	
+	String deptCode;
 	
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	
-	String proCode;
-	
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();
 	
-	private ArrayList<HashMap<String, String>> coursesList = new ArrayList<HashMap<String, String>>();
+	private ArrayList<HashMap<String, String>> proList = new ArrayList<HashMap<String, String>>();
 	
 	// url to get all courses list, use 10.0.2.2 instead of localhost
-	private static String url_all_courses = "http://eleven.luporz.com/ratemycourses/get_courses.php";
+	private static String url_programs = "http://eleven.luporz.com/ratemycourses/get_programs.php";
 	
 	// JSON node names
 	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_COURSES = "COURSES";
-	private static final String TAG_COURSEID = "COURSEID";
-	private static final String TAG_COURSENAME = "COURSENAME";
+	private static final String TAG_PROGRAM = "PROGRAM";
 	private static final String TAG_PROCODE = "PROCODE";
+	private static final String TAG_PRONAME = "PRONAME";
 	private static final String TAG_DEPTCODE = "DEPTCODE";
 	
 	// courses JSONArray
-	JSONArray courses = null;
+	JSONArray programs = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,31 +59,27 @@ public class CourseList extends ListActivity {
 		Intent i = getIntent();
 		
 		// getting dept code from intent
-		proCode = i.getStringExtra(TAG_PROCODE);
+		deptCode = i.getStringExtra(TAG_DEPTCODE);
 		
-		// loading courses in Background Thread
-		new LoadAllCourses().execute();
+		// loading programs in background thread
+		new LoadAllPrograms().execute();
 	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-	    //Toast.makeText(this, position + " selected", Toast.LENGTH_LONG).show();
 		
 		// getting values from selected ListItem
-		String courseId = ((TextView) v.findViewById(R.id.courseid)).getText().toString();
+		String proCode = ((TextView) v.findViewById(R.id.programcode)).getText().toString();
 		
 		// Starting new intent
-		Intent i = new Intent(getApplicationContext(), CourseView.class);
+		Intent i = new Intent(getApplicationContext(), CourseList.class);
 		
 		// Sending deptCode to next activity
-		i.putExtra(TAG_COURSEID, courseId);
+		i.putExtra(TAG_PROCODE, proCode);
 		startActivity(i);
 	}
 	
-	/**
-	 * Background Async Task to load all course by making HTTP request
-	 */
-	class LoadAllCourses extends AsyncTask<String, String, String> {
+	class LoadAllPrograms extends AsyncTask<String, String, String> {
 		
 		/**
 		 * Before starting background thread show Progress Dialog
@@ -94,26 +87,26 @@ public class CourseList extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(CourseList.this);
-			pDialog.setMessage("Loading courses. Please wait...");
+			pDialog = new ProgressDialog(ProgramList.this);
+			pDialog.setMessage("Loading programs. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(false);
 			pDialog.show();
 		}
 		
 		/**
-		 * getting all courses from url
+		 * getting all programs from url
 		 */
 		protected String doInBackground(String... args) {
 			// building parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair> ();
-			params.add(new BasicNameValuePair("PROGRAM_CODE", proCode));
+			params.add(new BasicNameValuePair("DEPTCODE", deptCode));
 			
 			// getting JSON string from URL
-			JSONObject json = jHelper.makeHttpRequest(url_all_courses, "GET", params);
+			JSONObject json = jHelper.makeHttpRequest(url_programs, "GET", params);
 			
 			// check your log cat for JSON response
-			Log.d("All Courses: ", json.toString());
+			Log.d("Programs: ", json.toString());
 			
 			try {
 				// checking for SUCCESS TAG
@@ -121,31 +114,33 @@ public class CourseList extends ListActivity {
 				
 				if (success == 1) {
 					// courses found
-					// getting array of courses
-					courses = json.getJSONArray(TAG_COURSES);
+					// getting array of programs
+					programs = json.getJSONArray(TAG_PROGRAM);
 					
 					// looping through all courses
-					for (int i=0; i<courses.length(); i++) {
-						JSONObject c = courses.getJSONObject(i);
+					for (int i=0; i<programs.length(); i++) {
+						JSONObject c = programs.getJSONObject(i);
 						
 						// stroing each json item in variable
-						String courseid = c.getString(TAG_COURSEID);
-						String coursename = c.getString(TAG_COURSENAME);
+						String proCode = c.getString(TAG_PROCODE);
+						String proName = c.getString(TAG_PRONAME);
+						String deptCode = c.getString(TAG_DEPTCODE);
 						
 						// creating new HashMap
 						HashMap<String, String> map = new HashMap<String, String>();
 						
 						// adding each child node to HashMap key => value
-						map.put(TAG_COURSEID, courseid);
-						map.put(TAG_COURSENAME, coursename);
+						map.put(TAG_PROCODE, proCode);
+						map.put(TAG_PRONAME, proName);
+						map.put(TAG_DEPTCODE, deptCode);
 						
 						// adding HashList to ArrayList
-						coursesList.add(map);
+						proList.add(map);
 					}
 				} else {
-					// no courses found
-					// prompt a "courses not found" message
-					Toast toast = Toast.makeText(getApplicationContext(), "No courses found", Toast.LENGTH_SHORT);
+					// no program found
+					// prompt a "programs not found" message
+					Toast toast = Toast.makeText(getApplicationContext(), "No programs found", Toast.LENGTH_SHORT);
 					toast.show();
 				}
 			} catch (JSONException e) {
@@ -168,14 +163,13 @@ public class CourseList extends ListActivity {
 					 * Updating parsed JSON data into ListView
 					 */
 					ListAdapter adapter = new SimpleAdapter(
-							CourseList.this, coursesList,
-							R.layout.course_list, new String[] {TAG_COURSEID, TAG_COURSENAME},
-							new int[] { R.id.courseid, R.id.coursename });
+							ProgramList.this, proList,
+							R.layout.program_list, new String[] {TAG_PROCODE, TAG_PRONAME},
+							new int[] {R.id.programcode, R.id.programname});
 					// updating listview
 					setListAdapter(adapter);
 				}
 			});
 		}
 	}
-
 }

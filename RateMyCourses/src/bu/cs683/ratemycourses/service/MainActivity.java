@@ -1,8 +1,9 @@
-package com.example.ratemycourses.service;
+package bu.cs683.ratemycourses.service;
+
+import bu.cs683.ratemycourses.listview.DeptList;
+import bu.cs683.ratemycourses.listview.ProgramList;
 
 import com.example.ratemycourses.R;
-import com.example.ratemycourses.listview.DeptList;
-import com.example.ratemycourses.listview.ProgramList;
 
 import android.os.Bundle;
 import android.app.Activity;
