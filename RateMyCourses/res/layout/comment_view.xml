@@ -3,6 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Course Name:" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Reviewed Date:" />
     
     <TableRow 
         android:id="@+id/helpfulness_row"
@@ -15,7 +33,7 @@
         	android:id="@+id/cr_helpfulness"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:textSize="18sp"
+        	android:textSize="15sp"
         	android:textStyle="bold"
         	android:text="@string/helpfulness" />
         
@@ -25,7 +43,8 @@
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
         	android:numStars="5"
-        	android:stepSize="1.0"
+        	android:rating="3"
+      		android:isIndicator="false"
         	style="@style/myRatingBar" />
         
     </TableRow>
@@ -41,7 +60,7 @@
         	android:id="@+id/cr_interest_level"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:textSize="18sp"
+        	android:textSize="15sp"
         	android:textStyle="bold"
         	android:text="@string/interest_level" />
         
@@ -51,7 +70,6 @@
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
         	android:numStars="5"
-        	android:stepSize="1.0"
         	style="@style/myRatingBar" />
         
     </TableRow>
@@ -67,7 +85,7 @@
         	android:id="@+id/cr_easiness"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:textSize="18sp"
+        	android:textSize="15sp"
         	android:textStyle="bold"
         	android:text="@string/easiness" />
         
@@ -77,7 +95,6 @@
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
         	android:numStars="5"
-        	android:stepSize="1.0"
         	style="@style/myRatingBar" />
         
     </TableRow>
@@ -93,7 +110,7 @@
         	android:id="@+id/cr_workload"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:textSize="18sp"
+        	android:textSize="15sp"
         	android:textStyle="bold"
         	android:text="@string/workload" />
         
@@ -103,7 +120,6 @@
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
         	android:numStars="5"
-        	android:stepSize="1.0"
         	style="@style/myRatingBar" />
         
     </TableRow>
@@ -119,7 +135,7 @@
         	android:id="@+id/cr_overall"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
-        	android:textSize="18sp"
+        	android:textSize="15sp"
         	android:textStyle="bold"
         	android:text="@string/overall" />
         
@@ -129,33 +145,16 @@
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
         	android:numStars="5"
-        	android:stepSize="1.0"
         	style="@style/myRatingBar"  />
         
     </TableRow>
-        
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/enter_comment"/>
     
-    <EditText 
-        android:id="@+id/comment_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:layout_marginBottom="15dip"
-        android:lines="5"
-        android:gravity="top"
-        android:inputType="text"/>
-    
-    <Button 
-        android:id="@+id/commit_rate_bt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/commit_rate_bt" />
+    <TextView
+        	android:id="@+id/cv_comment"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_marginLeft="3dp"
+        	android:textSize="18sp"
+        	android:text="THIS IS COMMENTS" />
 
 </LinearLayout>

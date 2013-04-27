@@ -13,35 +13,25 @@
         android:layout_marginBottom="184dp"
         android:text="@string/login" />
 
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_btn"
+        android:layout_marginBottom="86dp"
+        android:layout_marginRight="18dp"
+        android:layout_toLeftOf="@+id/login_btn"
+        android:text="@string/username"
+        android:textSize="18sp" />
+
     <EditText
         android:id="@+id/et_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_password"
-        android:layout_toRightOf="@+id/tv_password"
+        android:layout_alignLeft="@+id/et_username"
+        android:layout_alignTop="@+id/tv_password"
         android:ems="7"
         android:inputType="textPassword"
-        android:singleLine="true"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_username"
-        android:layout_below="@+id/et_username"
-        android:layout_marginTop="14dp"
-        android:text="@string/password"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/et_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_username"
-        android:layout_alignLeft="@+id/et_password"
-        android:ems="7"
-        android:inputType="text"
         android:singleLine="true"
         android:textSize="16sp" >
 
@@ -49,13 +39,25 @@
     </EditText>
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/login_btn"
-        android:layout_marginBottom="72dp"
-        android:layout_toLeftOf="@+id/login_btn"
-        android:text="@string/username"
+        android:layout_alignLeft="@+id/tv_username"
+        android:layout_below="@+id/et_username"
+        android:layout_marginTop="20dp"
+        android:text="@string/password"
         android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_username"
+        android:layout_alignBottom="@+id/tv_username"
+        android:layout_alignLeft="@+id/login_btn"
+        android:ems="7"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textSize="16sp" />
 
 </RelativeLayout>

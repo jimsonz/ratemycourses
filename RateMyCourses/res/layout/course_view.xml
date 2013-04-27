@@ -8,6 +8,7 @@
         android:id="@+id/course_code_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
         android:textSize="15sp"
         android:textStyle="bold"
         android:text="@string/course_code"/>
@@ -27,6 +28,7 @@
         android:id="@+id/university_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
         android:layout_below="@+id/course_code_label"
         android:text="@string/university_name"
         android:textStyle="bold"
@@ -47,6 +49,7 @@
         android:id="@+id/professor_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
         android:layout_below="@+id/university_name_label"
         android:text="@string/professor"
         android:textStyle="bold"
@@ -196,7 +199,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bookImage"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="38dp"
         android:text="@string/tell_friend" />
     
     <Button 
@@ -205,7 +208,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bookImage"
         android:layout_toRightOf="@id/tell_friend_bt"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="18dp"
         android:text="@string/rate_course" />
     
     <ListView 

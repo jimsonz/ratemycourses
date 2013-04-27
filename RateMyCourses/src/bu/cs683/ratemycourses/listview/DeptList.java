@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import bu.cs683.ratemycourses.service.JSONHelper;
+import bu.cs683.ratemycourses.JSONHelper;
 
 import com.example.ratemycourses.R;
 
@@ -52,7 +52,7 @@ public class DeptList extends ListActivity {
 	private static final String TAG_DEPTCODE = "DEPTCODE";
 	private static final String TAG_DEPTNAME = "DEPTNAME";
 	
-	// courses JSONArray
+	// depts JSONArray
 	JSONArray depts = null;
 	
 	@Override
@@ -150,7 +150,7 @@ public class DeptList extends ListActivity {
 		 * After completing background task Dismiss the progress dialog
 		 */
 		protected void onPostExecute(String file_url) {
-			// dismiss the dialog after getting all products
+			// dismiss the dialog after getting all depts
 			pDialog.dismiss();
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {

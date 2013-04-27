@@ -1,4 +1,4 @@
-package bu.cs683.ratemycourses.service;
+package bu.cs683.ratemycourses;
 
 public class ServerUnavailableException extends Exception {
 	

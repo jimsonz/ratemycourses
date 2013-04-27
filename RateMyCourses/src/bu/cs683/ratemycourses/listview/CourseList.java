@@ -10,8 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import bu.cs683.ratemycourses.JSONHelper;
 import bu.cs683.ratemycourses.course.CourseView;
-import bu.cs683.ratemycourses.service.JSONHelper;
 
 import com.example.ratemycourses.R;
 
@@ -34,7 +34,7 @@ public class CourseList extends ListActivity {
 	// Progress Dialog
 	private ProgressDialog pDialog;
 	
-	String proCode;
+	private String proCode;
 	
 	// Creating JSON Parser object
 	JSONHelper jHelper = new JSONHelper();

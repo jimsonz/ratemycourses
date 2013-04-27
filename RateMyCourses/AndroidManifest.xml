@@ -12,20 +12,15 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo" >
+        android:theme="@android:style/Theme" >
         <activity
-            android:name="bu.cs683.ratemycourses.service.MainActivity"
+            android:name="bu.cs683.ratemycourses.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        
-        <activity
-            android:name="bu.cs683.ratemycourses.listview.CourseList"
-            android:label="Courses" >
         </activity>
         
         <activity
@@ -37,6 +32,27 @@
             android:name="bu.cs683.ratemycourses.listview.ProgramList"
             android:label="Programs" >
         </activity>
+        
+        <activity
+            android:name="bu.cs683.ratemycourses.listview.CourseList"
+            android:label="Courses" >
+        </activity>
+        
+        <activity
+            android:name="bu.cs683.ratemycourses.course.CourseView"
+            android:label="Course Information" >
+        </activity>
+        
+        <activity
+            android:name="bu.cs683.ratemycourses.course.CourseRatingView"
+            android:label="Rate your course" >
+        </activity>
+        
+        <activity
+            android:name="bu.cs683.ratemycourses.course.CommentView"
+            android:label="Comments" >
+        </activity>
+        
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />

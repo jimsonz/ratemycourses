@@ -1,4 +1,4 @@
-package bu.cs683.ratemycourses.service;
+package bu.cs683.ratemycourses;
 
 import bu.cs683.ratemycourses.listview.DeptList;
 import bu.cs683.ratemycourses.listview.ProgramList;
