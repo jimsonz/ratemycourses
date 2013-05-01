@@ -42,12 +42,12 @@ public final class R {
         public static final int et_username=0x7f070003;
         public static final int helpfulness_ratingBar=0x7f070009;
         public static final int helpfulness_row=0x7f070007;
-        public static final int helpfuness_label=0x7f070026;
-        public static final int helpfuness_value_label=0x7f070025;
-        public static final int interest_level_label=0x7f070027;
+        public static final int helpfuness_label=0x7f070025;
+        public static final int helpfuness_value_label=0x7f070023;
+        public static final int interest_level_label=0x7f070026;
         public static final int interest_level_ratingBar=0x7f07000c;
         public static final int interest_level_table=0x7f07000a;
-        public static final int interest_level_value_label=0x7f070023;
+        public static final int interest_level_value_label=0x7f070027;
         public static final int login_btn=0x7f070000;
         public static final int menu_settings=0x7f070035;
         public static final int overall_label=0x7f07002c;
@@ -60,8 +60,8 @@ public final class R {
         public static final int programcode=0x7f070033;
         public static final int programname=0x7f070034;
         public static final int rate_course_bt=0x7f07002f;
-        public static final int rating_label=0x7f070024;
-        public static final int rating_value_label=0x7f070022;
+        public static final int rating_label=0x7f070022;
+        public static final int rating_value_label=0x7f070024;
         public static final int tell_friend_bt=0x7f07002e;
         public static final int textView1=0x7f070006;
         public static final int tv_password=0x7f070004;

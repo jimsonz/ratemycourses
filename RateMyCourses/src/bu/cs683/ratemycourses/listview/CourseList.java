@@ -50,7 +50,7 @@ public class CourseList extends ListActivity {
 	private static final String TAG_COURSEID = "COURSEID";
 	private static final String TAG_COURSENAME = "COURSENAME";
 	private static final String TAG_PROCODE = "PROCODE";
-	private static final String TAG_DEPTCODE = "DEPTCODE";
+	//private static final String TAG_DEPTCODE = "DEPTCODE";
 	
 	// courses JSONArray
 	JSONArray courses = null;

@@ -76,22 +76,24 @@
         android:src="@drawable/ic_launcher" />
     
     <TextView
+        android:id="@+id/rating_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/helpfuness_value_label"
+        android:layout_toRightOf="@id/bookImage"
+        android:layout_marginLeft="8dp"
+        android:text="@string/rating"
+        android:textSize="15sp" />
+    
+    <TextView
         android:id="@+id/rating_value_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/bookImage"
         android:layout_marginTop="23dp"
-        android:layout_toRightOf="@+id/interest_level_value_label"
+        android:layout_toRightOf="@id/rating_label"
+        android:layout_marginLeft="8dp"
         android:text="@string/rating_value"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/rating_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/helpfuness_value_label"
-        android:layout_alignRight="@+id/helpfuness_value_label"
-        android:text="@string/rating"
         android:textSize="15sp" />
     
     <TextView
