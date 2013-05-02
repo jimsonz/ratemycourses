@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import bu.cs683.ratemycourses.JSONHelper;
-import bu.cs683.ratemycourses.listview.CourseList;
 
 import com.example.ratemycourses.R;
 
@@ -22,8 +21,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +37,11 @@ public class CourseView extends Activity {
 	
 	JSONHelper jHelper = new JSONHelper();
 	
+	private ArrayList<HashMap<String, String>> commentsList = new ArrayList<HashMap<String, String>>();
+	
 	private static String url_get_course_details = "http://eleven.luporz.com/ratemycourses/get_course_details.php";
 	private static String url_get_avg_ratings = "http://eleven.luporz.com/ratemycourses/get_avg_ratings.php";
-	private static String url_get_comments = "http://eleven.luporz.com/ratemycourses/get_comments.php";
+	private static String url_get_comments_by_courseid = "http://eleven.luporz.com/ratemycourses/get_comments_by_courseid.php";
 	
 	// json nodes
 	private static final String TAG_SUCCESS = "success";
@@ -57,10 +60,16 @@ public class CourseView extends Activity {
 	private static final String TAG_AVG_WORKLOAD = "AVG_WORKLOAD";
 	private static final String TAG_AVG_OVERALL = "AVG_OVERALL";
 	
-	JSONArray courseObj = null;
-	JSONObject courseDetails = null;
-	JSONArray ratingsObj = null;
-	JSONObject ratingsDetails = null;
+	private static final String TAG_COMMENT_ID = "COMMENT_ID";
+	private static final String TAG_COMMENT_TEXT = "COMMENT_TEXT";
+	private static final String TAG_COMMENT_DATE = "COMMENT_DATE";
+	
+	JSONArray course = null;
+	JSONObject courseObj = null;
+	JSONArray ratings = null;
+	JSONObject ratingsObj = null;
+	JSONArray comments = null;
+	JSONObject commentsObj = null;
 	
 	// widgets
 	TextView courseCode;
@@ -74,6 +83,8 @@ public class CourseView extends Activity {
 	TextView avg_esn;
 	TextView avg_work;
 	TextView avg_ovl;
+	
+	ListView commentLV;
 	
 	// UI values
 	String readCourseCode;
@@ -106,6 +117,8 @@ public class CourseView extends Activity {
 		avg_work = (TextView) findViewById(R.id.workload_value_label);
 		avg_ovl = (TextView) findViewById(R.id.overall_value_label);
 		
+		commentLV = (ListView) findViewById(R.id.comment_list);
+		
 		// getting courseid from intent
 		Intent i = getIntent();
 		courseId = i.getStringExtra(TAG_COURSEID);
@@ -119,6 +132,26 @@ public class CourseView extends Activity {
 		// implement Tell a Friend button
 		tellFriend();
 		
+		commentLV.setOnItemClickListener(new OnItemClickListener() {
+			 
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                // getting values from selected ListItem
+                String commentId = ((TextView) view.findViewById(R.id.comment_id)).getText()
+                        .toString();
+ 
+                // Starting new intent
+                Intent in = new Intent(getApplicationContext(),
+                        CommentView.class);
+                // sending pid to next activity
+                in.putExtra(TAG_COURSEID, courseId);
+                in.putExtra(TAG_COMMENT_ID, commentId);
+ 
+                // starting new activity and expecting some response back
+                startActivity(in);
+            }
+        });
+		
 	}
 
 	private void rateThisCourse() {
@@ -130,6 +163,7 @@ public class CourseView extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), CourseRatingView.class);
+				i.putExtra(TAG_COURSEID, courseId);
 				startActivity(i);
 			}
 		});
@@ -144,6 +178,8 @@ public class CourseView extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), CourseRatingView.class);
+				
+				i.putExtra(TAG_COURSEID, courseId);
 				startActivity(i);
 			}
 		});
@@ -172,45 +208,73 @@ public class CourseView extends Activity {
 		 */
 		protected String doInBackground(String... args) {
 			
-			int success;
+			int success_course_info;
+			int success_ratings;
+			int success_comments;
 			
 			// building parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair> ();
 			params.add(new BasicNameValuePair("courseid", courseId));
 			
 			// getting JSON string from URL
-			JSONObject json = jHelper.makeHttpRequest(url_get_course_details, "GET", params);
+			JSONObject json_course_info = jHelper.makeHttpRequest(url_get_course_details, "GET", params);
 			JSONObject json_ratings = jHelper.makeHttpRequest(url_get_avg_ratings, "GET", params);
+			JSONObject json_comments = jHelper.makeHttpRequest(url_get_comments_by_courseid, "GET", params);
 			
 			// check your log cat for JSON response
-			Log.d("Course details: ", json.toString());
+			Log.d("Course details: ", json_course_info.toString());
 			Log.d("Ratings details: ", json_ratings.toString());
+			Log.d("Comments: ", json_comments.toString());
 			
 			try {
 				//Log.d("Course name: ", courseDetails.getString(TAG_COURSECODE));
 				// checking for SUCCESS TAG
-				success = json.getInt(TAG_SUCCESS);
+				success_course_info = json_course_info.getInt(TAG_SUCCESS);
+				success_ratings = json_ratings.getInt(TAG_SUCCESS);
+				success_comments = json_comments.getInt(TAG_SUCCESS);
 				
-				if (success == 1) {
-					// course details found
-					// getting array of details
-					courseObj = json.getJSONArray(TAG_COURSE);
+				if (success_course_info == 1 && success_ratings == 1
+						&& success_comments == 1) {
+					// getting course info
+					course = json_course_info.getJSONArray(TAG_COURSE);
 					
-					courseDetails = courseObj.getJSONObject(0);
-					readCourseCode = courseDetails.getString(TAG_COURSECODE);
-					readCourseName = courseDetails.getString(TAG_COURSENAME);
-					readInstructor = courseDetails.getString(TAG_INSTRUCTOR);
-					readProgramCode = courseDetails.getString(TAG_PROGRAM_CODE);
+					courseObj = course.getJSONObject(0);
+					readCourseCode = courseObj.getString(TAG_COURSECODE);
+					readCourseName = courseObj.getString(TAG_COURSENAME);
+					readInstructor = courseObj.getString(TAG_INSTRUCTOR);
+					readProgramCode = courseObj.getString(TAG_PROGRAM_CODE);
 					
-					ratingsObj = json_ratings.getJSONArray(TAG_RATINGS);
+					// getting ratings info
+					ratings = json_ratings.getJSONArray(TAG_RATINGS);
 					
-					ratingsDetails = ratingsObj.getJSONObject(0);
-					readTotalCount = ratingsDetails.getString(TAG_TOTAL_COUNT);
-					readAvg_Help = ratingsDetails.getString(TAG_AVG_HELPFULNESS);
-					readAvg_Int = ratingsDetails.getString(TAG_AVG_INTEREST_LEVEL);
-					readAvg_Esn = ratingsDetails.getString(TAG_AVG_EASINESS);
-					readAvg_Work = ratingsDetails.getString(TAG_AVG_WORKLOAD);
-					readAvg_Ovl = ratingsDetails.getString(TAG_AVG_OVERALL);
+					ratingsObj = ratings.getJSONObject(0);
+					readTotalCount = ratingsObj.getString(TAG_TOTAL_COUNT);
+					readAvg_Help = ratingsObj.getString(TAG_AVG_HELPFULNESS);
+					readAvg_Int = ratingsObj.getString(TAG_AVG_INTEREST_LEVEL);
+					readAvg_Esn = ratingsObj.getString(TAG_AVG_EASINESS);
+					readAvg_Work = ratingsObj.getString(TAG_AVG_WORKLOAD);
+					readAvg_Ovl = ratingsObj.getString(TAG_AVG_OVERALL);
+					
+					// getting list of comments
+					comments = json_comments.getJSONArray(TAG_RATINGS);
+					
+					// looping through all comments
+					for (int i=0; i<comments.length(); i++) {
+						JSONObject commentsObj = comments.getJSONObject(i);
+						
+						String commentId = commentsObj.getString(TAG_COMMENT_ID);
+						String commentText = commentsObj.getString(TAG_COMMENT_TEXT);
+						String commentDate = commentsObj.getString(TAG_COMMENT_DATE);
+						
+						HashMap<String, String> map = new HashMap<String, String>();
+						
+						map.put(TAG_COMMENT_ID, commentId);
+						map.put(TAG_COMMENT_TEXT, commentText);
+						map.put(TAG_COMMENT_DATE, commentDate);
+						
+						commentsList.add(map);
+					}
+					
 				} else {
 					// no courses found
 					// prompt a "courses not found" message
@@ -245,6 +309,16 @@ public class CourseView extends Activity {
 					avg_esn.setText(readAvg_Esn);
 					avg_work.setText(readAvg_Work);
 					avg_ovl.setText(readAvg_Ovl);
+					
+					SimpleAdapter adapter = new SimpleAdapter(
+							CourseView.this,
+							commentsList,
+							R.layout.comment_list,
+							new String[] {TAG_COMMENT_ID, TAG_COMMENT_TEXT,
+									TAG_COMMENT_DATE},
+							new int[] {R.id.comment_id, R.id.comment_text, R.id.comment_date});
+					
+					commentLV.setAdapter(adapter);
 				}	
 			});
 			

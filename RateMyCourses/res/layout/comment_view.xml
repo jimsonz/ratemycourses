@@ -4,23 +4,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/TextView01"
+    <TableRow 
+        android:id="@+id/coursename_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:text="Course Name:" />
-
-    <TextView
-        android:id="@+id/textView1"
+        android:gravity="center_vertical">
+        
+	    <TextView
+	        android:id="@+id/cv_coursename"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Course Name:" />
+        
+        <TextView
+	        android:id="@+id/cv_coursename_value"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="3dp"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Course Name" />
+        
+    </TableRow>
+    
+    <TableRow 
+        android:id="@+id/reviewby_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:text="Reviewed Date:" />
+        android:gravity="center_vertical">
+        
+	    <TextView
+	        android:id="@+id/cv_reviewby"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Reviewed By:" />
+        
+        <TextView
+	        android:id="@+id/cv_reviewby_value"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="3dp"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Name" />
+        
+    </TableRow>
+    
+    <TableRow 
+        android:id="@+id/reviewdate_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:gravity="center_vertical">
+        
+	    <TextView
+	        android:id="@+id/cv_reviewdate"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Reviewed Date:" />
+        
+        <TextView
+	        android:id="@+id/cv_reviewDate_value"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="3dp"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:text="Date" />
+        
+    </TableRow>
     
     <TableRow 
         android:id="@+id/helpfulness_row"
@@ -38,7 +98,7 @@
         	android:text="@string/helpfulness" />
         
         <RatingBar
-        	android:id="@+id/helpfulness_ratingBar"
+        	android:id="@+id/cv_helpfulness_ratingBar"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
@@ -65,7 +125,7 @@
         	android:text="@string/interest_level" />
         
         <RatingBar
-        	android:id="@+id/interest_level_ratingBar"
+        	android:id="@+id/cv_interest_level_ratingBar"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
@@ -90,7 +150,7 @@
         	android:text="@string/easiness" />
         
         <RatingBar
-        	android:id="@+id/easiness_ratingBar"
+        	android:id="@+id/cv_easiness_ratingBar"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
@@ -115,7 +175,7 @@
         	android:text="@string/workload" />
         
         <RatingBar
-        	android:id="@+id/workload_ratingBar"
+        	android:id="@+id/cv_workload_ratingBar"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
@@ -140,7 +200,7 @@
         	android:text="@string/overall" />
         
         <RatingBar
-        	android:id="@+id/overall_ratingBar"
+        	android:id="@+id/cv_overall_ratingBar"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
@@ -154,7 +214,16 @@
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:layout_marginLeft="3dp"
+        	android:layout_marginTop="5dp"
         	android:textSize="18sp"
         	android:text="THIS IS COMMENTS" />
+
+    <Button
+        android:id="@+id/cv_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp"
+        android:text="Done" />
 
 </LinearLayout>

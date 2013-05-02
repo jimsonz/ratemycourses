@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 public class CourseRatingView extends Activity {
 	
@@ -46,7 +47,7 @@ public class CourseRatingView extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.course_rating);
 		
-		// getting course details from intent
+		// getting courseid from intent
 		Intent i = getIntent();
 		courseId = i.getStringExtra(TAG_COURSEID);
 		
@@ -57,6 +58,8 @@ public class CourseRatingView extends Activity {
 		inputWorkload = (RatingBar) findViewById(R.id.workload_ratingBar);
 		inputOverall = (RatingBar) findViewById(R.id.overall_ratingBar);
 		inputCommentText = (EditText) findViewById(R.id.comment_text);
+		
+		inputCommentText.setSingleLine(false);
 		
 		// implement submit rating button
 		submitRating();
@@ -108,12 +111,13 @@ public class CourseRatingView extends Activity {
 			
 			// Building parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("course_id", courseId));
 			params.add(new BasicNameValuePair("helpfulness", helpfulness));
 			params.add(new BasicNameValuePair("interest_level", interest_level));
 			params.add(new BasicNameValuePair("easiness", easiness));
 			params.add(new BasicNameValuePair("workload", workload));
 			params.add(new BasicNameValuePair("overall", overall));
-			params.add(new BasicNameValuePair("commentText", commentText));
+			params.add(new BasicNameValuePair("comment_text", commentText));
 			
 			// getting JSON Object
 			JSONObject json = jHelper.makeHttpRequest(url_create_rating, "POST", params);
@@ -127,12 +131,16 @@ public class CourseRatingView extends Activity {
 				if (success == 1) {
 					// successfully created product
 					Intent i = new Intent(getApplicationContext(), CourseView.class);
+					i.putExtra(TAG_COURSEID, courseId);
 					startActivity(i);
 					
 					// close this screen
 					finish();
 				} else {
 					// creation fails
+					// prompt a "courses not found" message
+					Toast toast = Toast.makeText(getApplicationContext(), "Creating new ratings failed", Toast.LENGTH_SHORT);
+					toast.show();
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
